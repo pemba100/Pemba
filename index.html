@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Will You Be My Valentine?</title>
+<style>
+*{box-sizing:border-box;font-family:"Poppins",Arial,sans-serif;margin:0;padding:0}
+body{min-height:100svh;display:flex;justify-content:center;align-items:center;padding:16px;overflow:hidden;position:relative;background:#000}
+
+video#bgVideo{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:blur(3px) brightness(0.75)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.15);z-index:-1}
+
+.heart{position:absolute;bottom:-20px;animation:floatUp 6s linear infinite;font-size:clamp(16px,4vw,22px);text-shadow:0 0 8px #ff7eb9}
+@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-120vh);opacity:0}}
+
+.card{
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(12px);
+  border-radius:30px;
+  width:100%;
+  max-width:420px;
+  padding:clamp(18px,4vw,30px);
+  text-align:center;
+  box-shadow:0 25px 50px rgba(255,0,127,0.4),0 0 30px rgba(255,182,193,0.25);
+  z-index:2;
+  transition:transform 0.4s ease,box-shadow 0.4s ease
+}
+
+.card:hover{transform:translateY(-6px);box-shadow:0 35px 70px rgba(255,0,127,0.5),0 0 40px rgba(255,182,193,0.35)}
+
+.slideshow{
+  width:100%;
+  aspect-ratio:4/5;
+  max-height:340px;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:18px;
+  position:relative;
+  box-shadow:0 4px 25px rgba(0,0,0,0.25)
+}
+
+.slideshow img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity 1.2s ease-in-out;
+  border-radius:20px;
+  background:#fff
+}
+
+.slideshow img.active{opacity:1}
+
+h1{
+  font-size:clamp(20px,5vw,28px);
+  color:#ff2e84;
+  margin:8px 0;
+  text-shadow:0 2px 12px rgba(255,0,127,0.5)
+}
+
+p{
+  font-size:clamp(14px,3.8vw,15px);
+  color:#fff;
+  margin:6px 0;
+  text-shadow:0 1px 3px rgba(0,0,0,0.4)
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+  position:relative;
+  flex-wrap:wrap
+}
+
+button{
+  flex:1;
+  min-width:120px;
+  padding:12px;
+  border:none;
+  border-radius:25px;
+  font-size:clamp(14px,4vw,16px);
+  cursor:pointer;
+  transition:all 0.4s ease;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1)
+}
+
+button:hover{transform:scale(1.1);box-shadow:0 12px 30px rgba(255,0,127,0.25)}
+.yes{background:#ff2e84;color:#fff}
+.no{background:#ddd;color:#333;position:relative}
+
+#response{
+  margin-top:16px;
+  font-size:clamp(14px,4vw,16px);
+  font-weight:600;
+  color:#ff3f7f;
+  min-height:60px;
+  text-shadow:0 1px 3px rgba(0,0,0,0.4)
+}
+
+@media (max-height:650px){
+  .slideshow{max-height:240px}
+}
+
+</style>
+</head>
+<body>
+
+<video id="bgVideo" autoplay muted loop playsinline>
+  <source src="video1.MP4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<audio id="music" loop>
+  <source src="tunemayaa.wav" type="audio/mpeg">
+</audio>
+
+<div class="card" onclick="playMusic()">
+  <div class="slideshow">
+    <img src="img2.jpg" class="active">
+    <img src="img3.jpg">
+    <img src="img4.jpg">
+    <img src="img5.jpg">
+  </div>
+
+  <h1>Pemba ♾️💘 Sushmita</h1>
+  <p>Love you forever ♾️</p>
+  <p id="question">Will you be my Valentine… forever? ♾️💘</p>
+
+  <div class="buttons">
+    <button class="yes" onclick="yesClick()">Yes 💕</button>
+    <button class="no" id="noBtn" onclick="noClick()">No 🙈</button>
+  </div>
+
+  <div id="response"></div>
+</div>
+
+<script>
+function playMusic(){const m=document.getElementById("music");if(m.paused)m.play()}
+const slides=document.querySelectorAll(".slideshow img");let current=0;
+setInterval(()=>{slides[current].classList.remove("active");current=(current+1)%slides.length;slides[current].classList.add("active")},3000)
+let noCount=0;const response=document.getElementById("response"),noBtn=document.getElementById("noBtn");
+function noClick(){
+noCount++;
+if(noCount===1)response.innerText="Mayaaa… 🥺 I know this isn’t perfect, but my feelings are. They’re real, they’re steady, and they belong to you mayaa today, tomorrow, forever.” ♾️🥹.";
+else if(noCount===2)response.innerText="Mayaaa you don’t have to say yes… just know that you mean more to me than words ❤️";
+else if(noCount===3)response.innerText="No matter what you choose,🥺 my heart💖 will always chose you mayaa💖";
+else if(noCount===4)response.innerText="If love is patience, 😌then I’ll wait… because you’re worth it mayaaa 💕";
+else{noBtn.style.position="absolute";noBtn.style.left=Math.random()*220+"px";noBtn.style.top=Math.random()*60+"px";
+setTimeout(()=>{noBtn.style.display="none";response.innerText="herata mayaaaaa abata destiny lai ni answer thapaisakyo 💘 click 🥹 yes mayaa"},900)}
+}
+function yesClick(){response.innerText="Yaahooooooooooo 😍! mayaaaaa re maayaaaa😘 yeee meri mayaaaa 💕 Thank you for choosing me ❤️ Happy Valentine’s!";confettiBoom()}
+function confettiBoom(){for(let i=0;i<35;i++){const c=document.createElement("div");c.innerText="🎉";c.style.position="fixed";c.style.left=Math.random()*100+"vw";c.style.top="-10px";c.style.fontSize="20px";c.style.animation="floatUp 3s linear";document.body.appendChild(c);setTimeout(()=>c.remove(),3000)}}
+setInterval(()=>{const h=document.createElement("div");h.className="heart";h.innerText="💖";h.style.left=Math.random()*100+"vw";document.body.appendChild(h);setTimeout(()=>h.remove(),6000)},400)
+</script>
+
+</body>
+</html>
+<!-- a -->
+ <!-- b/ -->
