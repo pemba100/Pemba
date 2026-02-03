@@ -104,12 +104,16 @@ button:hover{transform:scale(1.1);box-shadow:0 12px 30px rgba(255,0,127,0.25)}
 @media (max-height:650px){
   .slideshow{max-height:240px}
 }
-
+@media (max-width:768px){
+  video#bgVideo{
+    filter:brightness(0.75);
+  }
+}
 </style>
 </head>
 <body>
 
-<video id="bgVideo" autoplay muted loop playsinline>
+<video id="bgVideo" autoplay muted loop playsinline preload="none" poster="poster.jpg" >
   <source src="video1.MP4" type="video/mp4">
 </video>
 <div class="overlay"></div>
@@ -120,10 +124,10 @@ button:hover{transform:scale(1.1);box-shadow:0 12px 30px rgba(255,0,127,0.25)}
 
 <div class="card" onclick="playMusic()">
   <div class="slideshow">
-    <img src="img2.jpg" class="active">
-    <img src="img3.jpg">
-    <img src="img4.jpg">
-    <img src="img5.jpg">
+    <img src="img2.jpg" class="active" loading="eager">
+    <img src="img3.jpg" loading="lazy">
+    <img src="img4.jpg" loading="lazy">
+    <img src="img5.jpg" loading="lazy">
   </div>
 
   <h1>Pemba ♾️💘 Sushmita</h1>
@@ -159,5 +163,3 @@ setInterval(()=>{const h=document.createElement("div");h.className="heart";h.inn
 
 </body>
 </html>
-<!-- a -->
- <!-- b/ -->
